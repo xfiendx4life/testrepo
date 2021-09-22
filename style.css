@@ -1,8 +1,8 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@100&display=swap');
 body {
-    font-family: Montserrat;
+    font-family: Arial, Helvetica, sans-serif;
+    margin: 0 auto;
 }
-
 .header-footer {
     background-color: rgb(56, 199, 199);
     padding: 10px;
@@ -10,7 +10,7 @@ body {
     border-radius: 5px;
 }
 
-.header-footer>a>li {
+.menu-item {
     display: inline-block;
     margin-right: 20px;
 }
@@ -33,11 +33,79 @@ body {
     text-align: center;
 }
 
-.header-footer>a {
+.menu-link {
     text-decoration: none;
     color: inherit;
+    font-size: 1.2em;
 }
 
-.header-footer>a:hover {
-    color: green;
+.menu-link:hover {
+    color: red;
 }
+
+.container {
+    margin: 20px 20px;
+}
+
+.item-img {
+    width: 200px;
+    display: block;
+    margin: 0 auto;
+}
+
+.item-card{
+    display: inline-block;
+    width: 250px;
+    margin-top: 10px;
+    padding: 5px;
+    margin-bottom: 10px;
+}
+
+.item-card:hover {
+    outline: 1px solid black;
+}
+.name {
+    display: inline-block;
+    width: 70%;
+}
+.price {
+    text-align: right;
+    width: 25%;
+
+    display: inline-block;
+}
+
+.description {
+    text-align: left;
+}
+
+.help {
+    width: 50px;
+    height: 50px;
+    background-color: rgba(13, 94, 243, 0.822);
+    color: white;
+    font-size: 2.7em;
+    border-radius: 100%;
+    position: fixed;
+    top: 80%;
+    right: 10px
+}
+q {
+    text-align: center;
+    margin: 0 !important; 
+    height: 100%;
+}
+
+.help:hover {
+    background-color: rgb(13, 93, 243);
+}
+
+.q-link {
+    text-decoration: none;
+    color:inherit;
+    margin: 0;
+    padding: 0px;
+    display: block;
+}
+
+
