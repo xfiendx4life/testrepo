@@ -1,4 +1,4 @@
-from p import *
+from dbapi import *
 import unittest
 
 class Testdb(unittest.TestCase):
