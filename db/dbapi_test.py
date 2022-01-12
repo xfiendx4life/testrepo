@@ -5,7 +5,7 @@ class Testdb(unittest.TestCase):
     @classmethod 
     def setUpClass(cls):
         cls.db = DB(path=":memory:")
-        cursor = cls.db.newCursor()
+        cls.db.newCursor()
         cls.db.cursor.executescript('''CREATE TABLE courses (
         id INTEGER PRIMARY KEY AUTOINCREMENT,
         name TEXT NOT NULL UNIQUE,
