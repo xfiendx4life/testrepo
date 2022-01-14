@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{item.name}}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='/style/style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <header class="header-footer">
+            <ul>
+                <li class="menu-item">
+                    <a class="menu-link" href="#">Главная</a>
+                </li>
+                <li class="menu-item">
+                    <a class="menu-link" href="/catalog">Каталог</a>
+                </li>
+                <li class="menu-item">
+                    <a class="menu-link" href="/about">О нас</a>
+                </li>
+            </ul>
+        </header>
+        <div class="data">
+            <h1>{{item.name}}</h1>
+            <a href="#"><img class="item-img" src="{{ url_for('static', filename='/img/shitty_panther_ytsv-p3.png') }}"></a>
+            <body>
+                {{item.descr}}
+            </body>
+        </div>
+    </div>
+</body>
+</html>
