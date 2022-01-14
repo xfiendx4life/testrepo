@@ -24,7 +24,7 @@
         </header>
         <div class="data">
             <h1>{{item.name}}</h1>
-            <a href="#"><img class="item-img" src="{{ url_for('static', filename='/img/shitty_panther_ytsv-p3.png') }}"></a>
+            <a href="#"><img class="item-img" src="{{ url_for('static', filename='/img/'+item.image) }}"></a>
             <body>
                 {{item.descr}}
             </body>
