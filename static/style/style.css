@@ -137,15 +137,33 @@ q {
 
 }
 
-@media screen and (min-width: 900px) {
+/* @media screen and (min-width: 900px) {
     .form-control {
         width: 800px!important;
     }
-}
+} */
 
 @media screen and (max-width: 600px) {
     .menu-item {
         display: block;
     }
+}
+
+.feedback-area {
+    width: 100%;
+    background-color: rgb(175, 217, 241);
+}
+
+.feedback {
+    width: 100%;
+    background-color: rgb(128, 223, 226);
+    outline: solid rgb(15, 15, 26) 1px;
+    margin: 10px;
+    padding-left: 10px;
+}
+
+.login {
+    font-size: 0.8em;
+    color: rgb(87, 78, 78);
 }
 
