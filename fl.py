@@ -33,8 +33,9 @@ def about():
     if request.method == 'POST':
         login = request.form.get('login')
         text = request.form.get('text')
-        f = Feedback(login, text)
-        FEEDBACK.append(f)
+        if login != '' and text != '':
+            f = Feedback(login, text)
+            FEEDBACK.append(f)
     return render_template('about.html', feedback=FEEDBACK)
 
 @app.route('/catalog')
