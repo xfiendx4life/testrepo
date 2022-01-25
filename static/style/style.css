@@ -167,3 +167,28 @@ q {
     color: rgb(87, 78, 78);
 }
 
+.auth {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    padding: 10px;
+}
+
+.auth > input:first-child {
+    margin-bottom: 10px;
+}
+
+.login-head {
+    position: absolute;
+    top: 2%;
+    right: 15%;
+    display: inline-block;
+    font-size: 1.2em;
+}
+.alert {
+    margin-top: 10px;
+}
+
+.logout-link {
+    text-decoration: none;
+    color: black;
+}
