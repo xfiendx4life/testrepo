@@ -1,7 +1,7 @@
 from crypt import methods
 from models import Users, Items, Feedback
 from init import app, db
-from flask import redirect, render_template,\
+from flask import make_response, redirect, render_template,\
     escape, abort, request, session, url_for, flash
 import sqlalchemy
 # //app.register_error_handler('404.html', page_not_found)
@@ -33,7 +33,9 @@ def logout():
 
 @app.route('/')
 def index():
-    return render_template('index.html')
+    resp = make_response(render_template('index.html'))
+    resp.set_cookie('test', 'testvalue')
+    return resp
 
 @app.route('/about', methods=['GET', 'POST'])
 def about():

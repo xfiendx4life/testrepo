@@ -85,6 +85,10 @@ body {
 
 .description {
     text-align: left;
+    width: 30ch;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
 }
 
 .help {
