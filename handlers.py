@@ -1,5 +1,5 @@
 from crypt import methods
-from models import Users, Items, Feedback
+from models import Users, Items, Feedback, db
 from init import app
 from flask import make_response, redirect, render_template,\
     escape, abort, request, session, url_for, flash
@@ -13,7 +13,6 @@ def page_not_found(e):
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
-    resp = make_response(render_template('login.html'))
     if request.method == 'POST':
         name = request.form.get('name')
         password = request.form.get('password')
@@ -25,9 +24,7 @@ def login():
             flash('Wrong login or password', 'warning')
         except sqlalchemy.exc.NoResultFound:
             flash('Wrong login or password', 'danger')
-        finally:
-            resp.status_code = 401
-    return resp
+    return render_template('login.html')
 
 @app.route('/logout')
 def logout():
@@ -35,18 +32,28 @@ def logout():
         session.pop('name')
     return redirect('/', code=302)
 
-@app.route('/<name>')
+@app.route('/<name>', methods=['GET', 'POST'])
 def profile(name):
     if session.get('name') == name:
-        if Users.query.filter_by(name=name) is not None:
-            return f'Hello, {escape(name)}'
+        if (u := Users.query.filter_by(name=name)) is not None:
+            if request.method == 'POST':
+                u = u.one()
+                old = request.form.get('old_password')
+                new = request.form.get('new_password')
+                if old == new:
+                    flash('Новый пароль тот же, что и старый', 'warning')
+                elif u.validate(old):
+                    u.set_password(new)
+                    flash('Пароль изменен', 'success')
+                    db.session.add(u)
+                    db.session.commit()
+            return render_template('profile.html', user=u)
     flash('Please authenticate', 'warning')
     return redirect(url_for('login'), code=301)
 
 @app.route('/')
 def index():
     resp = make_response(render_template('index.html'))
-    print(request.cookies.get('test'))
     if not request.cookies.get('test'):
        resp.set_cookie('test', 'testvalue', expires=datetime.now()+timedelta(minutes=30))
     return resp
@@ -77,7 +84,6 @@ def catalog():
 def show_item_profile(item):
     item = escape(item)
     return render_template('item.html', item=Items.query.filter_by(name=item).one())
-    return abort(404, description="not found")
 
 if __name__ == '__main__':
     app.run(debug=True)

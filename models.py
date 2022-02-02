@@ -12,6 +12,8 @@ class Users(db.Model):
     def validate(self, password):
         return self.password == hashlib.md5(password.encode('utf8')).hexdigest()
 
+    def set_password(self, password):
+        self.password = hashlib.md5(password.encode('utf8')).hexdigest()
 
 class Items(db.Model):
     id = db.Column(db.Integer, primary_key=True)
