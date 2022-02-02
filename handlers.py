@@ -1,8 +1,9 @@
 from crypt import methods
 from models import Users, Items, Feedback
-from init import app, db
+from init import app
 from flask import make_response, redirect, render_template,\
     escape, abort, request, session, url_for, flash
+from datetime import datetime, timedelta
 import sqlalchemy
 # //app.register_error_handler('404.html', page_not_found)
 
@@ -12,6 +13,7 @@ def page_not_found(e):
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
+    resp = make_response(render_template('login.html'))
     if request.method == 'POST':
         name = request.form.get('name')
         password = request.form.get('password')
@@ -23,7 +25,9 @@ def login():
             flash('Wrong login or password', 'warning')
         except sqlalchemy.exc.NoResultFound:
             flash('Wrong login or password', 'danger')
-    return render_template('login.html')
+        finally:
+            resp.status_code = 401
+    return resp
 
 @app.route('/logout')
 def logout():
@@ -31,10 +35,20 @@ def logout():
         session.pop('name')
     return redirect('/', code=302)
 
+@app.route('/<name>')
+def profile(name):
+    if session.get('name') == name:
+        if Users.query.filter_by(name=name) is not None:
+            return f'Hello, {escape(name)}'
+    flash('Please authenticate', 'warning')
+    return redirect(url_for('login'), code=301)
+
 @app.route('/')
 def index():
     resp = make_response(render_template('index.html'))
-    resp.set_cookie('test', 'testvalue')
+    print(request.cookies.get('test'))
+    if not request.cookies.get('test'):
+       resp.set_cookie('test', 'testvalue', expires=datetime.now()+timedelta(minutes=30))
     return resp
 
 @app.route('/about', methods=['GET', 'POST'])
