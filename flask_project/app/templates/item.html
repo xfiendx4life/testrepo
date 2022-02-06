@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+{% block content %}
+        <div class="data">
+            <h1>{{item.name}}</h1>
+            <a href="#"><img class="item-img" src="{{ url_for('static', filename='/img/'+item.image) }}"></a>
+            <div>
+                {{item.descr}}
+            </div>
+        </div>
+{% endblock %}
