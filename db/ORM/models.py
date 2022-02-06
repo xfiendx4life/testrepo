@@ -1,5 +1,5 @@
 import os
-from init import *
+from app import *
 from datetime import datetime
 
 # worst practice
