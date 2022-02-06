@@ -1,5 +1,5 @@
 from app.models import Users, Items, Feedback
-from app import app, db
+from app.app import app, db
 from flask import make_response, redirect, render_template,\
     escape, abort, request, session, url_for, flash
 from datetime import datetime, timedelta
