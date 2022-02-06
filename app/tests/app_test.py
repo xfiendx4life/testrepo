@@ -1,6 +1,5 @@
 import unittest
 
-from sqlalchemy import delete
 from app.handlers import app, db
 from app.models import Users
 import tempfile
