@@ -1,9 +1,9 @@
+from crypt import methods
 from app.models import Users, Items, Feedback
 from app.app import app, db
 from flask import make_response, redirect, render_template,\
     escape, abort, request, session, url_for, flash
 from datetime import datetime, timedelta
-import sqlalchemy
 # //app.register_error_handler('404.html', page_not_found)
 
 @app.errorhandler(404)
@@ -83,3 +83,21 @@ def catalog():
 def show_item_profile(item):
     item = escape(item)
     return render_template('item.html', item=Items.query.filter_by(name=item).one())
+
+@app.route('/register', methods=['GET', 'POST'])
+def reg():
+    if request.method == 'POST':
+        name = request.form.get('name')
+        password = request.form.get('password')
+        try:
+            Users.query.filter_by(name=name).one()
+            flash('Name exists, choose another', 'warning')
+        except Exception as e:
+            print(e)
+            user = Users(name=name)
+            user.set_password(password)
+            db.session.add(user)
+            db.session.commit()
+            flash(f'Welcome mr.{name}', 'success')
+            return redirect(url_for('index'))
+    return render_template('reg.html')
