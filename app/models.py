@@ -11,6 +11,9 @@ class Users(db.Model):
     def __init__(self, name, password) -> None:
         super().__init__()
         self.name = name
+        self.set_password(password)
+
+    def set_password(self, password):
         self.password = hashlib.md5(password.encode("utf8")).hexdigest()
 
     def __repr__(self):
