@@ -8,14 +8,16 @@ class Users(db.Model):
     name = db.Column(db.String(80), unique=True, nullable=False)
     password = db.Column(db.String(256), nullable=False)
 
+    def __init__(self, name, password) -> None:
+        super().__init__()
+        self.name = name
+        self.password = hashlib.md5(password.encode("utf8")).hexdigest()
+
     def __repr__(self):
         return f"{self.id} {self.name}"
 
     def validate(self, password):
         return self.password == hashlib.md5(password.encode("utf8")).hexdigest()
-
-    def set_password(self, password):
-        self.password = hashlib.md5(password.encode("utf8")).hexdigest()
 
 
 class Items(db.Model):

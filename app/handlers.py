@@ -117,10 +117,10 @@ def reg():
             flash("Name exists, choose another", "warning")
         except Exception as e:
             print(e)
-            user = Users(name=name)
-            user.set_password(password)
+            user = Users(name, password)
             db.session.add(user)
             db.session.commit()
+            session["name"] = name
             flash(f"Welcome mr.{name}", "success")
             return redirect(url_for("index"))
     return render_template("reg.html")
