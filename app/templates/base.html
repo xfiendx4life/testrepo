@@ -29,7 +29,7 @@
                 <li class="menu-item">
                     <a class="menu-link" href="/register">Регистрация</a>
                 </li>
-                
+
                 <div class="login-head" style="top:0%">
                     {% if not session['name'] %}
                         <a href="/login" class="btn btn-light" >Войти</a>
@@ -49,7 +49,7 @@
                 </div>
               {% endfor %}
             {% endif %}
-          {% endwith %}    
+          {% endwith %}
         {% block content %} {% endblock %}
         <footer class="header-footer footer">
             <ul>
